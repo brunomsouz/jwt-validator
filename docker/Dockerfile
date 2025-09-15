@@ -3,8 +3,8 @@ FROM maven:3.9.11-eclipse-temurin-21-alpine AS builder
 
 WORKDIR /app
 
-COPY ./pom.xml ./
-COPY ./src ./src
+COPY ../pom.xml ./
+COPY ../src ./src
 
 RUN mvn clean package -DskipTests
 
@@ -14,8 +14,8 @@ FROM openjdk:21-jdk-slim
 WORKDIR /app
 
 COPY --from=builder /app/target/*.jar app.jar
-COPY ./src/main/resources/application.properties ./config/application.properties
-COPY ./src/main/resources/messages_en.properties ./config/messages_en.properties
+COPY ../src/main/resources/application.properties ./config/application.properties
+COPY ../src/main/resources/messages_en.properties ./config/messages_en.properties
 
 EXPOSE 8080
 
