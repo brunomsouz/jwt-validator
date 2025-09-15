@@ -43,6 +43,14 @@ jobs:
       - name: Docker auth
         run: gcloud auth configure-docker ${{ env.REGION }}-docker.pkg.dev
       - name: Build
-        run: docker build . -f ${{ env.DOCKERFILE_PATH }} -t ${{ env.REGISTRY_LOCATION }}/${{ env.PROJECT_NAME }}:${{ github.sha }}
+        run: |
+          IMAGE="${{ env.REGISTRY_LOCATION }}/${{ env.PROJECT_NAME }}:${{ github.sha }}"
+          docker build . -f ${{ env.DOCKERFILE_PATH }} -t $IMAGE
       - name: Push
-        run: docker push ${{ env.REGISTRY_LOCATION }}/${{ env.PROJECT_NAME }}:${{ github.sha }}
+        run: docker push $IMAGE
+      - name: Deploy to cloud run
+        run: |
+          gcloud run deploy ${{ env.PROJECT_NAME }} \
+            --image $IMAGE \
+            --region ${{ env.REGION }} \
+            --allow-unauthenticated
