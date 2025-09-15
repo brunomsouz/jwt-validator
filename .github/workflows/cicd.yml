@@ -42,15 +42,15 @@ jobs:
         uses: google-github-actions/setup-gcloud@v1
       - name: Docker auth
         run: gcloud auth configure-docker ${{ env.REGION }}-docker.pkg.dev
+      - name: Set image env
+        run: echo "IMAGE=${{ env.REGISTRY_LOCATION }}/${{ env.PROJECT_NAME }}:${{ github.sha }}" >> $GITHUB_ENV
       - name: Build
-        run: |
-          IMAGE="${{ env.REGISTRY_LOCATION }}/${{ env.PROJECT_NAME }}:${{ github.sha }}"
-          docker build . -f ${{ env.DOCKERFILE_PATH }} -t $IMAGE
+        run: docker build . -f ${{ env.DOCKERFILE_PATH }} -t ${{ env.IMAGE }}
       - name: Push
-        run: docker push $IMAGE
+        run: docker push ${{ env.IMAGE }}
       - name: Deploy to cloud run
         run: |
           gcloud run deploy ${{ env.PROJECT_NAME }} \
-            --image $IMAGE \
+            --image ${{ env.IMAGE }} \
             --region ${{ env.REGION }} \
             --allow-unauthenticated
