@@ -1,0 +1,15 @@
+logging:
+  level:
+    web: info
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+spring:
+  application:
+    name: jwt-validator
+server:
+  shutdown: graceful

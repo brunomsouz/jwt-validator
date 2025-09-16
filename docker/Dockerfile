@@ -14,7 +14,7 @@ FROM openjdk:21-jdk-slim
 WORKDIR /app
 
 COPY --from=builder /app/target/*.jar app.jar
-COPY ../src/main/resources/application.properties ./config/application.properties
+COPY ../src/main/resources/application.yml ./config/application.yml
 COPY ../src/main/resources/messages_en.properties ./config/messages_en.properties
 
 EXPOSE 8080
