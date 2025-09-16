@@ -1,4 +1,4 @@
-package me.souz.jwtvalidator.config;
+package me.souz.jwtvalidator.infrastructure.config;
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Info;
