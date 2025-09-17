@@ -1,0 +1,57 @@
+{
+	"info": {
+		"_postman_id": "13e516d9-043f-4257-ba79-da4ef0ff88be",
+		"name": "jwt-validator",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "48437718",
+		"_collection_link": "https://brunomsouz-1283958.postman.co/workspace/Bruno-Moreira-de-Souza's-Worksp~a1b0536a-1ffc-4a40-801b-13e6f4436b3d/collection/48437718-13e516d9-043f-4257-ba79-da4ef0ff88be?action=share&source=collection_link&creator=48437718"
+	},
+	"item": [
+		{
+			"name": "/jwt",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"jwt\": \"e.e.e\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/v1/jwt-validate",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"jwt-validate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/health",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/actuator/health",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"actuator",
+						"health"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
