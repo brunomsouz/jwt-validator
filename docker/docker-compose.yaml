@@ -1,0 +1,14 @@
+name: file-ingestion-compose
+
+services:
+  jwt-validator:
+    restart: unless-stopped
+    build:
+      context: ../
+      dockerfile: ./docker/Dockerfile
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/file_ingestion
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=root
+    ports:
+      - "8080:8080"
