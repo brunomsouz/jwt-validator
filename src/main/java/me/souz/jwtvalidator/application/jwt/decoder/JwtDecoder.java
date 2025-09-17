@@ -1,4 +1,4 @@
-package me.souz.jwtvalidator.application.jwt;
+package me.souz.jwtvalidator.application.jwt.decoder;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
