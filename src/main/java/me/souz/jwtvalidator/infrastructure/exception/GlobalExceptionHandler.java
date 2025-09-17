@@ -11,11 +11,6 @@ import java.util.stream.Collectors;
 @ControllerAdvice
 public class GlobalExceptionHandler {
     @ExceptionHandler
-    public ResponseEntity<ErrorResponse> abstractExceptionHandler(AbstractException ex) {
-        return new ResponseEntity<>(new ErrorResponse(ex.getHttpStatus().name(), ex.getMessage()), ex.getHttpStatus());
-    }
-
-    @ExceptionHandler
     public ResponseEntity<ErrorResponse> handleValidationException(MethodArgumentNotValidException ex) {
         String errors = ex.getBindingResult()
                 .getFieldErrors()
