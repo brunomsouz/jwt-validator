@@ -15,11 +15,7 @@ import java.util.Base64;
 @Component
 public class JwtDecoder {
     private final Base64.Decoder decoder = Base64.getUrlDecoder();
-    private final ObjectMapper objectMapper;
-
-    public JwtDecoder(ObjectMapper objectMapper) {
-        this.objectMapper = objectMapper;
-    }
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     public DecodedJwt decode(String encodedJwt) {
         final String[] parts = encodedJwt.split("\\.");
