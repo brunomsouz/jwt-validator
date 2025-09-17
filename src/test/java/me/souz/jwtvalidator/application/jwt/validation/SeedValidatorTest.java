@@ -36,7 +36,7 @@ class SeedValidatorTest {
 
     @ParameterizedTest
     @MethodSource("testData")
-    public void testValid(final String value, final boolean expected) {
+    void testValid(final String value, final boolean expected) {
         assertEquals(expected, seedValidator.isValid(value));
     }
 }
