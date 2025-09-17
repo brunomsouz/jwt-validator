@@ -1,27 +1,23 @@
 package me.souz.jwtvalidator.application.jwt.validation;
 
 import me.souz.jwtvalidator.application.jwt.model.Payload;
+import me.souz.jwtvalidator.application.jwt.validation.handlers.NameValidationHandler;
+import me.souz.jwtvalidator.application.jwt.validation.handlers.RoleValidationHandler;
+import me.souz.jwtvalidator.application.jwt.validation.handlers.SeedValidationHandler;
+import me.souz.jwtvalidator.application.jwt.validation.handlers.ValidationHandler;
 import org.springframework.stereotype.Component;
 
 @Component
 public class PayloadValidator {
-    private final NameValidator nameValidator;
-    private final RoleValidator roleValidator;
-    private final SeedValidator seedValidator;
+    private final ValidationHandler chain;
 
-    public PayloadValidator(NameValidator nameValidator,
-                            RoleValidator roleValidator,
-                            SeedValidator seedValidator) {
-        this.nameValidator = nameValidator;
-        this.roleValidator = roleValidator;
-        this.seedValidator = seedValidator;
+    public PayloadValidator() {
+        chain = new NameValidationHandler();
+        chain.setNext(new RoleValidationHandler())
+             .setNext(new SeedValidationHandler());
     }
 
     public boolean isValid(final Payload payload) {
-        boolean validName = nameValidator.isValid(payload.getName());
-        boolean validRole = roleValidator.isValid(payload.getRole());
-        boolean validSeed = seedValidator.isValid(payload.getSeed());
-
-        return validName && validRole && validSeed;
+        return chain.validate(payload);
     }
 }

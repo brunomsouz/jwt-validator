@@ -1,10 +1,6 @@
 package me.souz.jwtvalidator.application.jwt.validation;
 
-import org.springframework.stereotype.Component;
-
-@Component
-public class SeedValidator implements Validator {
-    @Override
+public class SeedValidator {
     public boolean isValid(final String value) {
         final int parsedInt;
 
