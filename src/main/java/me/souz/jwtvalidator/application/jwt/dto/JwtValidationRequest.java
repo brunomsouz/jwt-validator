@@ -1,4 +1,4 @@
-package me.souz.jwtvalidator.application.jwt.model;
+package me.souz.jwtvalidator.application.jwt.dto;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
