@@ -1,0 +1,39 @@
+openapi: 3.1.0
+info:
+  title: JWT Validator API
+  description: API docs
+  version: "1.0"
+servers:
+  - url: http://localhost:8080
+    description: Generated server url
+paths:
+  /api/v1/jwt-validate:
+    post:
+      tags:
+        - jwt-controller
+      summary: Validates a JWT token
+      operationId: validateJwt
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/JwtValidationRequest"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+components:
+  schemas:
+    JwtValidationRequest:
+      type: object
+      properties:
+        jwt:
+          type: string
+          minLength: 1
+          pattern: "^[A-Za-z0-9-_]+\\.[A-Za-z0-9-_]+\\.[A-Za-z0-9-_]+$"
+      required:
+        - jwt
