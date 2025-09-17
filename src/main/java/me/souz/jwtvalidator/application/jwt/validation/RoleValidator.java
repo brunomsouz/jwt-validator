@@ -6,6 +6,10 @@ public class RoleValidator {
     private static final Set<String> ALLOWED_ROLES = Set.of("Admin", "Member", "External");
 
     public boolean isValid(final String value) {
+        if (value == null) {
+            return false;
+        }
+
         return ALLOWED_ROLES.contains(value);
     }
 }
